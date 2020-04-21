@@ -10,7 +10,7 @@ import { PagerService } from '../pager.service';
 export class SearchComponent implements OnInit {
   searchResult = [];
   search: string;
-  page = 1;
+  page = 34;
   pagedItems: any = [];
   total_results = 0;
   total_pages: number;
@@ -22,17 +22,18 @@ export class SearchComponent implements OnInit {
   searchUsers() {
 
     this.searchService.getAllUsers(this.search, this.page).then(res => {
-      console.log(res);
+
       this.searchResult = res['items']
       this.total_results = res['total_count']
-
+      console.log(this.searchResult)
       this.total_pages = Math.floor(this.total_results / 30);
 
-      // if (this.total_pages - Math.floor(this.total_results / 10)) {
-      //   this.total_pages = this.total_results + 1;
-      // }
-
-      console.log(this.total_pages)
+      if (this.total_pages - Math.floor(this.total_results / 30) && this.total_pages <= 33) {
+        this.total_pages = this.total_results + 1;
+      }
+      else {
+        this.total_pages = 34;
+      }
 
     })
 
@@ -54,23 +55,8 @@ export class SearchComponent implements OnInit {
 
 
 
-  // setPage(page: number) {
-  //   // get pager object from service
-  //   this.pager = this.pagerService.getPager(this.searchResult.length, page);
-
-  //   // get current page of items
-  //   this.pagedItems = this.searchResult.slice(this.pager.startIndex, this.pager.endIndex + 1);
-  // }
-
-  getFollowers(url) {
-    let response
-    this.searchService.getUrl(url).then(res => {
-      console.log(res)
-      response = res
-    })
-    return response['length']
-  }
 
 }
+
 
 

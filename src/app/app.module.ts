@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
 import { SearchService } from './search.service';
 import { PagerService } from './pager.service';
+import { ListItemComponent } from './list-item/list-item.component';
 
 
 
@@ -16,6 +17,7 @@ import { PagerService } from './pager.service';
   declarations: [
     AppComponent,
     SearchComponent,
+    ListItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,7 @@ import { PagerService } from './pager.service';
     HttpClientModule,
     FormsModule
   ],
-  providers: [SearchService, PagerService],
+  providers: [SearchService, PagerService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

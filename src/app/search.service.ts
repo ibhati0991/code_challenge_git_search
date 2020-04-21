@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -7,15 +7,23 @@ import { HttpClient } from "@angular/common/http";
 export class SearchService {
   apiUrl = 'https://api.github.com/search/users?q=';
 
-  constructor(private http: HttpClient, ) { }
+  constructor(private http: HttpClient) { }
 
 
   getAllUsers(search, page = 1) {
-    return this.http.get(`${this.apiUrl}${search}&page=${page}`).toPromise();
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append("Access-Control-Allow-Headers", "X-Requested-With")
+    return this.http.get(`${this.apiUrl}${search}&per_page=10&page=${page}`, { headers: headers }).toPromise();
   }
 
   getUrl(url) {
-    return this.http.get(url).toPromise();
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append("Access-Control-Allow-Headers", "X-Requested-With")
+    return this.http.get(url, { headers: headers }).toPromise();
   }
 
 

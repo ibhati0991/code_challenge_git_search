@@ -2,19 +2,14 @@
     <label>Search</label>
     <input type="text" [(ngModel)]="search" placeholder="Search">
     <button (click)="page=1; searchUsers()">Go</button>
-    <span class="badge">Total : {{total_results}} </span>
+    <span class="badge">{{total_results}} Users</span>
 </div>
 
 
 
-<p *ngIf="total_pages">Nothing to show</p>
+<p *ngIf="!total_pages">Nothing to show</p>
 <!-- items being paged -->
-<div *ngFor="let item of searchResult" class="item">
-    <img src="{{item.avatar_url}}" alt="avatar">
-    <a href="{{item.html_url}}">
-        <h4>{{item.login | uppercase}}</h4>
-    </a>
-</div>
+<app-list-item *ngFor="let item of searchResult" [user]="item"></app-list-item>
 
 <!-- pager -->
 <ul *ngIf="total_pages" class="pagination">
@@ -26,9 +21,9 @@
     </li>
     <li>{{page}} / {{total_pages}}</li>
     <li>
-        <button [disabled]="page === total_pages" (click)="next()">Next</button>
+        <button [disabled]="page === 34" (click)="next()">Next</button>
     </li>
     <li>
-        <button [disabled]="page === total_pages" (click)="page=total_pages; searchUsers()">Last</button>
+        <button [disabled]="page === 34" (click)="page=34; searchUsers()">Last</button>
     </li>
 </ul>
