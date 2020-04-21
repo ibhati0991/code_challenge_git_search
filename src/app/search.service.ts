@@ -10,8 +10,8 @@ export class SearchService {
   constructor(private http: HttpClient, ) { }
 
 
-  getAllUsers(search) {
-    return this.http.get(`${this.apiUrl}${search}`).toPromise();
+  getAllUsers(search, page = 1) {
+    return this.http.get(`${this.apiUrl}${search}&page=${page}`).toPromise();
   }
 
   getUrl(url) {

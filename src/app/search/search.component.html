@@ -1,15 +1,15 @@
 <div class="search-box">
     <label>Search</label>
     <input type="text" [(ngModel)]="search" placeholder="Search">
-    <button (click)="searchUsers()">Go</button>
-    <span class="badge">Total : {{searchResult.length}} </span>
+    <button (click)="page=1; searchUsers()">Go</button>
+    <span class="badge">Total : {{total_results}} </span>
 </div>
 
 
 
-<p *ngIf="!pagedItems.length">Nothing to show</p>
+<p *ngIf="total_pages">Nothing to show</p>
 <!-- items being paged -->
-<div *ngFor="let item of pagedItems" class="item">
+<div *ngFor="let item of searchResult" class="item">
     <img src="{{item.avatar_url}}" alt="avatar">
     <a href="{{item.html_url}}">
         <h4>{{item.login | uppercase}}</h4>
@@ -17,20 +17,18 @@
 </div>
 
 <!-- pager -->
-<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-    <li [ngClass]="{disabled:pager.currentPage === 1}">
-        <a (click)="setPage(1)">First</a>
+<ul *ngIf="total_pages" class="pagination">
+    <li>
+        <button [disabled]="page === 1" (click)="page=1; searchUsers()">First</button>
     </li>
-    <li [ngClass]="{disabled:pager.currentPage === 1}">
-        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+    <li>
+        <button [disabled]="page === 1" (click)="prev()">Previous</button>
     </li>
-    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-        <a (click)="setPage(page)">{{page}}</a>
+    <li>{{page}} / {{total_pages}}</li>
+    <li>
+        <button [disabled]="page === total_pages" (click)="next()">Next</button>
     </li>
-    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-        <a (click)="setPage(pager.currentPage + 1)">Next</a>
-    </li>
-    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-        <a (click)="setPage(pager.totalPages)">Last</a>
+    <li>
+        <button [disabled]="page === total_pages" (click)="page=total_pages; searchUsers()">Last</button>
     </li>
 </ul>
