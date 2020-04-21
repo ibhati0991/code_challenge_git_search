@@ -2,9 +2,10 @@
     <label>Search</label>
     <input type="text" [(ngModel)]="search" placeholder="Search">
     <button (click)="searchUsers()">Go</button>
+    <span class="badge">Total : {{searchResult.length}} </span>
 </div>
 
-<span>Total : {{searchResult.length}} </span>
+
 
 <p *ngIf="!pagedItems.length">Nothing to show</p>
 <!-- items being paged -->
@@ -12,7 +13,6 @@
     <img src="{{item.avatar_url}}" alt="avatar">
     <a href="{{item.html_url}}">
         <h4>{{item.login | uppercase}}</h4>
-        <p>Followers : </p>
     </a>
 </div>
 
