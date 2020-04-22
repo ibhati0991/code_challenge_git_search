@@ -26,15 +26,11 @@ export class SearchComponent implements OnInit {
       this.searchResult = res['items']
       this.total_results = res['total_count']
       console.log(this.searchResult)
-      this.total_pages = Math.floor(this.total_results / 30);
+      this.total_pages = Math.floor(this.total_results / 10);
 
-      if (this.total_pages - Math.floor(this.total_results / 30) && this.total_pages <= 33) {
+      if (this.total_pages - Math.floor(this.total_results / 10)) {
         this.total_pages = this.total_results + 1;
       }
-      else {
-        this.total_pages = 34;
-      }
-
     })
 
   }

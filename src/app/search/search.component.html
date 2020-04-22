@@ -1,11 +1,8 @@
 <div class="search-box">
-    <label>Search</label>
     <input type="text" [(ngModel)]="search" placeholder="Search">
     <button (click)="page=1; searchUsers()">Go</button>
-    <span class="badge">{{total_results}} Users</span>
 </div>
-
-
+<span *ngIf="searchResult.length">{{total_results}} Users</span>
 
 <p *ngIf="!total_pages">Nothing to show</p>
 <!-- items being paged -->
