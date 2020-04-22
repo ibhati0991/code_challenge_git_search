@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 })
 export class SearchService {
   apiUrl = 'https://api.github.com/search/users?q=';
-
+  userUrl = 'https://api.github.com/users/';
   constructor(private http: HttpClient) { }
 
 
@@ -18,12 +18,13 @@ export class SearchService {
     return this.http.get(`${this.apiUrl}${search}&per_page=10&page=${page}`, { headers: headers }).toPromise();
   }
 
-  getUrl(url) {
+
+  getUser(login) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     headers.append('Access-Control-Allow-Origin', '*');
     headers.append("Access-Control-Allow-Headers", "X-Requested-With")
-    return this.http.get(url, { headers: headers }).toPromise();
+    return this.http.get(`${this.userUrl}${login}`, { headers: headers }).toPromise();
   }
 
 

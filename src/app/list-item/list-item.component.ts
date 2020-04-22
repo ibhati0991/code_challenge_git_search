@@ -1,6 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SearchService } from '../search.service';
-
+export interface User {
+  name: string;
+  location: string;
+  email: string;
+  followers: number;
+  following: number;
+  public_repos: number;
+}
 @Component({
   selector: 'app-list-item',
   templateUrl: './list-item.component.html',
@@ -8,30 +15,18 @@ import { SearchService } from '../search.service';
 })
 export class ListItemComponent implements OnInit {
   @Input() user: any;
-  followers = [];
-  stars = [];
+
+  userDetails: User;
   constructor(private searchService: SearchService, ) { }
 
   ngOnInit(): void {
-    this.getFollowers();
-    this.getStarred()
+    this.getUser()
   }
 
-  getFollowers() {
-
-    this.searchService.getUrl(this.user['followers_url']).then((res: []) => {
+  getUser() {
+    this.searchService.getUser(this.user.login).then((res: User) => {
       console.log(res)
-      this.followers = res;
+      this.userDetails = res;
     })
-
   }
-  getStarred() {
-
-    this.searchService.getUrl(this.user['starred_url']).then((res: []) => {
-      console.log(res)
-      this.followers = res;
-    })
-
-  }
-
 }

@@ -1,9 +1,15 @@
 <div class="item">
-    <img src="{{user.avatar_url}}" alt="avatar">
-    <a href="{{user.html_url}}">
-        <h4>{{user.login | uppercase}}</h4>
-        <span>Followers : {{followers.length}} </span>
-        <span>Starred : {{stars.length}} </span>
 
+    <img src="{{user.avatar_url}}" alt="avatar">
+    <a href="{{user.html_url}}" style="margin:0 20px">
+        <h4>{{userDetails.name | uppercase}}</h4>
+        <h6>{{userDetails.location}}</h6>
+        <span>email : {{userDetails.email}} </span>
     </a>
+    <div style="margin:0 20px">
+        <span>Followers : {{userDetails.followers}} </span>
+        <span>Following : {{userDetails.following}} </span>
+        <span>Public Repos : {{userDetails.public_repos}} </span>
+    </div>
+
 </div>
